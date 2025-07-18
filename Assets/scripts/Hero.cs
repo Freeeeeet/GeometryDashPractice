@@ -1,13 +1,14 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 public class Hero : MonoBehaviour
 {
     public float jumpForce = 15f;
     public float rotationSpeed = -500f;
-    public float positionX = -10f;
+    public float positionX = -6.5f;
     public Rigidbody2D rb;
     private bool isGrounded = true;
     private HeroInputActions inputActions;
@@ -104,6 +105,7 @@ public class Hero : MonoBehaviour
     {
         inputActions.Enable();
         inputActions.Gameplay.Jump.performed += _ => OnJump();
+        inputActions.Gameplay.Menu.performed += _ => OnExitToMenu();
     }
 
     void OnDisable()
@@ -135,5 +137,13 @@ public class Hero : MonoBehaviour
         }
     }
 
+    void OnExitToMenu()
+    {
+        Debug.Log("Exiting to main menu.");
+        // Здесь можно добавить логику для возврата в главное меню
+        // Например, загрузить сцену главного меню
+        SceneManager.LoadScene(0); // Предполагается, что 0 - это индекс главного меню
+       
+    }
 
 }
